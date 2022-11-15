@@ -11,11 +11,16 @@ with open('raw.csv', mode='w') as csvFile:
     csvWriter = csv.writer(csvFile, delimiter=',')
     csvWriter.writerow(['time', 'angle'])
     positive = True
+    firstRun = True
     while True:
         msg = udpsock.recvfrom(bufferSize)
         msgStr = msg[0].decode('ascii')
         if len(msgStr) < 15:
             timeStamp, angle = msgStr.split('/', 2)
+            if firstRun:
+                offset = int(timeStamp)
+                firstRun = False
+            timeStamp = str(int(timeStamp) - offset)
             if not positive:
                 angle = str(-1 * int(angle))
             positive = not positive

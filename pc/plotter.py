@@ -10,7 +10,7 @@ plt.plot(data['time'], data['angle'])
 
 plt.title('Grafic Pendul')
 
-plt.xlabel('Timp')
-plt.ylabel('Unghi')
+plt.xlabel('Timp (ms)')
+plt.ylabel('Unghi (deg)')
 
 plt.show()
